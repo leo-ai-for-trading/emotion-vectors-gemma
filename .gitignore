@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.tools/
+*.egg-info/
+build/
+dist/
+
+# macOS
+.DS_Store
+
+# Secrets
+.env
+.env.*
+HF_TOKEN
+HF_TOKEN.txt
+*TOKEN*
+*.key
+*.pem
+
+# Generated artifacts
+data/generated/
+outputs/
+*.npz
+
+# Large local model/data artifacts
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+*.pdf

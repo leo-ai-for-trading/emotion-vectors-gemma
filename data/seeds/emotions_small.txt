@@ -1,0 +1,9 @@
+happy
+sad
+calm
+angry
+afraid
+loving
+desperate
+nervous
+
