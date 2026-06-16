@@ -1,0 +1,16 @@
+afraid
+angry
+ashamed
+calm
+curious
+desperate
+envious
+frustrated
+guilty
+happy
+hopeful
+loving
+nervous
+proud
+relieved
+sad

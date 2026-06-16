@@ -33,11 +33,19 @@ dialogue, tone, thoughts, and situational context.
 FORBIDDEN_EMOTION_TERMS = {
     "afraid": ["afraid", "fear", "fearful", "scared", "terrified"],
     "angry": ["angry", "anger", "furious", "mad", "rage"],
+    "ashamed": ["ashamed", "shame", "shameful", "embarrassed", "humiliated"],
     "calm": ["calm", "peaceful", "serene", "relaxed", "tranquil"],
+    "curious": ["curious", "curiosity", "inquisitive", "intrigued"],
     "desperate": ["desperate", "desperation", "frantic", "hopeless"],
+    "envious": ["envious", "envy", "jealous", "jealousy"],
+    "frustrated": ["frustrated", "frustration", "annoyed", "exasperated"],
+    "guilty": ["guilty", "guilt", "remorse", "remorseful"],
     "happy": ["happy", "happiness", "joy", "joyful", "cheerful", "glad"],
+    "hopeful": ["hopeful", "hope", "optimistic", "expectant"],
     "loving": ["loving", "love", "affection", "adoring", "tender"],
     "nervous": ["nervous", "anxious", "anxiety", "uneasy", "jittery"],
+    "proud": ["proud", "pride", "triumphant", "accomplished"],
+    "relieved": ["relieved", "relief", "reassured"],
     "sad": ["sad", "sadness", "sorrow", "grief", "melancholy"],
 }
 

@@ -1,0 +1,35 @@
+{
+  "profile": "small_gemma3_1b_application",
+  "purpose": "Small, RAM-aware Gemma 3 1B reproduction profile for application/demo use.",
+  "hardware_target": {
+    "machine": "Apple Silicon laptop",
+    "minimum_ram_gb": 16,
+    "notes": "Designed for low memory. Store generated data and model cache on external SSD when possible."
+  },
+  "model": {
+    "model_id": "google/gemma-3-1b-it",
+    "generation_device": "cpu",
+    "analysis_device": "cpu",
+    "dtype": "float32"
+  },
+  "dataset": {
+    "emotions_file": "data/seeds/emotions_16.txt",
+    "topics_file": "data/seeds/topics_12.txt",
+    "n_per_prompt": 3,
+    "expected_story_count": 576
+  },
+  "runtime": {
+    "batch_size": 1,
+    "max_length": 384,
+    "start_token": 30,
+    "max_new_tokens": 650,
+    "temperature": 0.8,
+    "top_p": 0.9,
+    "neutral_variance_threshold": 0.5
+  },
+  "storage_policy": {
+    "save_full_hidden_states": false,
+    "commit_generated_data": false,
+    "run_directory": "runs/small_gemma3_1b_application"
+  }
+}

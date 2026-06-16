@@ -306,6 +306,69 @@ transformers
 
 ---
 
+## RAM-Aware Application Profile
+
+This repository is now configured for a practical application-oriented
+reproduction on a 16 GB Apple Silicon laptop.
+
+Recommended local profile:
+
+```text
+Model: google/gemma-3-1b-it
+Dataset scale: 16 emotions x 12 topics x 3 stories = 576 stories
+Generation device: cpu by default
+Activation-analysis device: cpu
+Batch size: 1
+Max sequence length: 384
+Full hidden-state saving: disabled
+Generated artifacts: runs/ directory, ignored by Git
+```
+
+The active small profile is documented in:
+
+```text
+configs/small_gemma3_1b_application.json
+```
+
+Seed files:
+
+```text
+data/seeds/emotions_16.txt
+data/seeds/topics_12.txt
+data/probes/probe_texts_16.jsonl
+```
+
+This profile is intentionally much smaller than the original paper. The goal is
+to reproduce the method well enough for an application/demo while staying inside
+the RAM and storage constraints of a 16 GB MacBook Pro.
+
+Storage policy:
+
+- Keep source code, configs, seed lists, and tiny examples in Git.
+- Keep generated stories, raw generations, vectors, probe outputs, and plots out
+  of Git.
+- Use `runs/` for local experiment outputs.
+- Use an external SSD for model cache and larger experiment outputs when needed.
+
+Optional external SSD cache setup:
+
+```bash
+export HF_HOME="/Volumes/YOUR_SSD_NAME/hf_cache"
+export TRANSFORMERS_CACHE="/Volumes/YOUR_SSD_NAME/hf_cache/transformers"
+export RUN_DIR="/Volumes/YOUR_SSD_NAME/emotion_vectors/small_gemma3_1b_application"
+```
+
+Only use public hardware descriptions in application materials, for example:
+
+```text
+Apple M1 Pro, 16 GB RAM
+```
+
+Do not publish device identifiers such as serial number, hardware UUID, or
+provisioning UDID.
+
+---
+
 ## Hugging Face Access
 
 Gemma models on Hugging Face may be gated. You need to:
@@ -325,6 +388,36 @@ Do not commit tokens to the repository.
 ---
 
 ## Reproducing The Current Pipeline
+
+### Recommended: Small Application Reproduction
+
+Run the RAM-aware profile end to end:
+
+```bash
+PYTHONPATH=src scripts/run_small_application_repro.sh
+```
+
+This writes outputs to:
+
+```text
+runs/small_gemma3_1b_application/
+```
+
+For a quick smoke test before launching the full 576-story run:
+
+```bash
+LIMIT_EMOTIONS=2 LIMIT_TOPICS=2 N_PER_PROMPT=1 \
+  PYTHONPATH=src scripts/run_small_application_repro.sh
+```
+
+The smoke test runs only:
+
+```text
+2 emotions x 2 topics x 1 story = 4 stories
+```
+
+This is the safest first check after changing dependencies, model access, or
+cache paths.
 
 ### 1. Compute Tiny Emotion Vectors
 
@@ -487,6 +580,15 @@ data/seeds/emotions_small.txt
 data/seeds/topics_small.txt
 ```
 
+Application profile inputs:
+
+```text
+configs/small_gemma3_1b_application.json
+data/seeds/emotions_16.txt
+data/seeds/topics_12.txt
+data/probes/probe_texts_16.jsonl
+```
+
 Generated datasets:
 
 ```text
@@ -605,18 +707,18 @@ construction behavior.
 
 To move this from a prototype toward a stronger application:
 
-1. Remove secrets from the project directory.
-2. Add `.gitignore` entries for tokens, caches, and large generated outputs.
-3. Expand `emotions_small.txt` and `topics_small.txt`.
-4. Generate a larger balanced dataset.
-5. Validate the generated stories.
-6. Compute vectors across multiple layers.
-7. Compare probe accuracy across layers.
-8. Add a held-out validation set.
+1. Run the 4-story smoke test with `LIMIT_EMOTIONS=2 LIMIT_TOPICS=2`.
+2. Run the full 576-story small application profile.
+3. Validate the generated stories.
+4. Compute vectors with `google/gemma-3-1b-it` on CPU.
+5. Score the 16 probe texts.
+6. Add probe accuracy metrics.
+7. Add plots for token-level probe scores.
+8. Run a selected-layer sweep, not a full all-layer sweep.
 9. Run steering experiments with positive and negative controls.
-10. Add plots for token-level probe scores.
-11. Compare Gemma 270M, 1B, and larger Gemma models.
-12. Document which layer and dataset size produce the most reliable vectors.
+10. Compare Gemma 270M and Gemma 3 1B.
+11. Publish only code/configs/tiny examples in Git.
+12. Keep large generated outputs in local storage or external SSD.
 
 ---
 
