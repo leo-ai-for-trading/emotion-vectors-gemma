@@ -364,9 +364,6 @@ Only use public hardware descriptions in application materials, for example:
 Apple M1 Pro, 16 GB RAM
 ```
 
-Do not publish device identifiers such as serial number, hardware UUID, or
-provisioning UDID.
-
 ---
 
 ## Hugging Face Access
@@ -382,8 +379,6 @@ Example:
 ```bash
 export HF_TOKEN="<your-hugging-face-token>"
 ```
-
-Do not commit tokens to the repository.
 
 ---
 
