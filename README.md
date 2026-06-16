@@ -117,10 +117,6 @@ emotion-vectors-gemma/
     test_vectors.py
 ```
 
-Important security note: Hugging Face token files such as `HF_TOKEN` and
-`HF_TOKEN.txt` are local-only secrets and are ignored by `.gitignore`. Do not
-commit or share token files.
-
 ---
 
 ## How The Method Works
