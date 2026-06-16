@@ -380,7 +380,7 @@ Gemma models on Hugging Face may be gated. You need to:
 Example:
 
 ```bash
-export HF_TOKEN="hf_..."
+export HF_TOKEN="<your-hugging-face-token>"
 ```
 
 Do not commit tokens to the repository.
@@ -645,7 +645,7 @@ Some Gemma models require Hugging Face authentication. If you see a gated-repo
 or 401 error, make sure:
 
 ```bash
-export HF_TOKEN="hf_..."
+export HF_TOKEN="<your-hugging-face-token>"
 ```
 
 is set and that you have accepted the model terms.
